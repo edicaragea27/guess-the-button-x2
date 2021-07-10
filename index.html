@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>Guess the button</title>
+</head>
+<body>
+
+    <div id="button-div">
+
+        <label>Number:</label>
+
+        <input type="number" value="" id="nr" min="" max="" step="1">
+        <button onclick="guessTheWinnerButton()" id="submit">Submit</button>
+
+
+    </div>
+    <div class="button-start">
+        <button id="new-game" onclick="window.location.reload()" class="button-four">NEW GAME</button>
+    </div>
+
+    
+    <p id="demo"></p>
+
+    <script>
+        
+        function displayWinnerMessage() {
+            document.getElementById("demo").innerHTML = "YOU WIN!";
+            
+        }
+        function displayLoserMessage() {
+            document.getElementById("demo").innerHTML = "YOU LOSE! TRY AGAIN.";
+        }
+        
+        function guessTheWinnerButton() {
+            var winnerButtonId = Math.floor(Math.random() * nr.value + 1);
+           
+            document.getElementById("submit").style.display = "none";
+            document.getElementById("demo").innerHTML = "PICK A BUTTON.";
+            
+            var i;
+            for (i = 1; i <= nr.value; i++) {
+                var x = document.createElement("BUTTON");
+                var t = document.createTextNode("Click me!");
+                if (i == winnerButtonId)
+                    x.id = "winner";
+                else
+                    x.className = "loser";
+                x.appendChild(t);
+                document.body.appendChild(x);
+            }
+
+            var winner = document.getElementById("winner");
+            winner.addEventListener("click", displayWinnerMessage);
+            var losers = document.getElementsByClassName("loser");
+            for (var j = 0; j <= losers.length; j++)
+                losers[j].addEventListener("click", displayLoserMessage);
+        }
+    </script>
+
+</body>
+</html>
